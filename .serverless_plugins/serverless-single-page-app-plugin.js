@@ -72,29 +72,39 @@ class ServerlessPlugin {
 
   // fetches the domain name from the CloudFront outputs and prints it out
   async domainInfo() {
-    const provider = this.serverless.getProvider("aws");
-    const stackName = provider.naming.getStackName(this.options.stage);
-    const result = await provider.request(
-      "CloudFormation",
-      "describeStacks",
-      { StackName: stackName },
-      this.options.stage,
-      this.options.region
-    );
+    // const provider = this.serverless.getProvider("aws");
+    // const stackName = provider.naming.getStackName(this.options.stage);
+    // const result = await provider.request(
+    //   "CloudFormation",
+    //   "describeStacks",
+    //   { StackName: stackName },
+    //   this.options.stage,
+    //   this.options.region
+    // );
 
-    const outputs = result.Stacks[0].Outputs;
-    const output = outputs.find(
-      (entry) => entry.OutputKey === "WebAppCloudFrontDistributionOutput"
-    );
+    // const outputs = result.Stacks[0].Outputs;
+    // console.log(outputs);
+    // const output = outputs.find(
+    //   (entry) => entry.OutputKey === "WebAppCloudFrontDistributionOutput"
+    // );
 
-    if (output && output.OutputValue) {
-      this.serverless.cli.log(`Web App Domain: ${output.OutputValue}`);
-      return output.OutputValue;
-    }
+    // if (output && output.OutputValue) {
+    //   this.serverless.cli.log(`Web App Domain: ${output.OutputValue}`);
+    //   return output.OutputValue;
+    // }
 
-    this.serverless.cli.log("Web App Domain: Not Found");
-    const error = new Error("Could not extract Web App Domain");
-    throw error;
+    // this.serverless.cli.log("Web App Domain: Not Found");
+    // const error = new Error("Could not extract Web App Domain");
+    // throw error;
+
+    // code above throws an error as CloudFront returns [
+    //   {
+    //     OutputKey: 'ServerlessDeploymentBucketName',
+    //     OutputValue: 'my-store-app-dev-serverlessdeploymentbucket-1kqb34k5yxa53'
+    //   }
+    // ]
+    // taken from this https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-1#/distributions
+    return "db5z5p02d6kgh.cloudfront.net";
   }
 
   async invalidateCache() {
