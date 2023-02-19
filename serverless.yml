@@ -19,7 +19,7 @@ plugins:
 
 custom:
   client:
-    bucketName: my-store-app
+    bucketName: my-store-app-vsorokin
     distributionFolder: dist
   s3BucketName: ${self:custom.client.bucketName}
 
@@ -74,7 +74,7 @@ resources:
       Properties:
         DistributionConfig:
           Origins:
-            - DomainName: !GetAtt WebAppS3Bucket.RegionalDomainName
+            - DomainName: ${self:custom.s3BucketName}.s3.amazonaws.com
               ## An identifier for the origin which must be unique within the distribution
               Id: myS3Origin
               ## In case you don't want to restrict the bucket access use CustomOriginConfig and remove S3OriginConfig
@@ -130,4 +130,5 @@ resources:
     WebAppS3BucketOutput:
       Value: !Ref WebAppS3Bucket
     WebAppCloudFrontDistributionOutput:
-      Value: !GetAtt WebAppCloudFrontDistribution.DomainName
+      Value:
+        "Fn::GetAtt": [WebAppCloudFrontDistribution, DomainName]
