@@ -1,4 +1,5 @@
 CloundFront link https://db5z5p02d6kgh.cloudfront.net
+S3 link https://my-store-app-vsorokin.s3.amazonaws.com/index.html
 
 # React-shop-cloudfront
 
