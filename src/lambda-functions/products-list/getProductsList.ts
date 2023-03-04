@@ -6,6 +6,9 @@ const handler: APIGatewayProxyHandler =
     try {
       return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify([]),
       };
     } catch (err: unknown) {
