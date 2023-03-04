@@ -6,9 +6,20 @@ provider:
   name: aws
   runtime: nodejs14.x
 
+functions:
+  getProductsList:
+    handler: src/lambda-functions/products-list/getProductsList.handler
+    events:
+      - http:
+          path: "ecommerce-vs/products"
+          method: get
+          cors: true
+
 plugins:
   - serverless-finch
   - serverless-single-page-app-plugin
+  - serverless-plugin-typescript
+  - serverless-offline
 
 custom:
   ## Serverless-finch configuration
@@ -20,6 +31,8 @@ custom:
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
   s3BucketName: ${self:custom.client.bucketName}
+  serverlessPluginTypefscript:
+    tsConfigFileLocation: "tsconfig.node.json"
 
 resources:
   Resources:
@@ -110,7 +123,7 @@ resources:
             DefaultTTL: 0
           ## The certificate to use when viewers use HTTPS to request objects.
           ViewerCertificate:
-            CloudFrontDefaultCertificate: "true"
+            CloudFrontDefaultCertificate: true
           ## Uncomment the following section in case you want to enable logging for CloudFront requests
           # Logging:
           #   IncludeCookies: 'false'
