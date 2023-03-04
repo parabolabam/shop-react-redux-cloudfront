@@ -1,3 +1,6 @@
+CloundFront link https://d2inijmk9mcu5.cloudfront.net/
+S3 link https://aws-react-bucket-vsorokin.s3.amazonaws.com/index.html
+
 # React-shop-cloudfront
 
 This is frontend starter project for nodejs-aws mentoring program. It uses the following technologies:
