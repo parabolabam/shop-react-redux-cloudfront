@@ -8,7 +8,7 @@ provider:
 
 functions:
   getProductsList:
-    handler: lambda-functions/getProductsList
+    handler: lambda-functions/getProductsList.handler
     events:
       - http:
           path: "ecommerce-vs/products"
