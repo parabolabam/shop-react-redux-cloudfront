@@ -1,5 +1,5 @@
-CloundFront link https://d2ac3376mtvkwd.cloudfront.net/
-S3 link https://aws-react-bucket-vsorokin.s3.amazonaws.com/index.html
+CloundFront link https://d3ei0f9jfo5y8p.cloudfront.net
+S3 link https://aws-ep-vs.s3.amazonaws.com/index.html
 
 # React-shop-cloudfront
 
