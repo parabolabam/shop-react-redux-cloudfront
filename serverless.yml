@@ -8,10 +8,17 @@ provider:
 
 functions:
   getProductsList:
-    handler: lambda-functions/getProductsList.handler
+    handler: lambda-functions/products/getProductsList.handler
     events:
       - http:
           path: "ecommerce-vs/products"
+          method: get
+          cors: true
+  getProductById:
+    handler: lambda-functions/products/getProductById.handler
+    events:
+      - http:
+          path: "ecommerce-vs/products/{id}"
           method: get
           cors: true
 
