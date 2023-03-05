@@ -7,13 +7,27 @@ provider:
   runtime: nodejs14.x
 
 functions:
+  addProduct:
+    handler: lambda-functions/products/addProduct.handler
+    environment:
+      PRODUCT_TABLE: ${self:custom.ProductTable.name}
+
+    events:
+      - http:
+          path: "ecommerce-vs/products"
+          method: post
+          cors: true
+
   getProductsList:
     handler: lambda-functions/products/getProductsList.handler
+    environment:
+      PRODUCT_TABLE: ${self:custom.ProductTable.name}
     events:
       - http:
           path: "ecommerce-vs/products"
           method: get
           cors: true
+
   getProductById:
     handler: lambda-functions/products/getProductById.handler
     events:
@@ -35,9 +49,16 @@ custom:
     distributionFolder: dist
     indexDocument: index.html
     manageResources: false
+
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
   s3BucketName: ${self:custom.client.bucketName}
+
+  ## Dynamo DB
+  ProductTable:
+    name: ${self:resources.Resources.ProductTable.Properties.TableName}
+
+  ##
   serverlessPluginTypescript:
     tsConfigFileLocation: "./tsconfig.node.json"
 
@@ -136,6 +157,20 @@ resources:
           #   IncludeCookies: 'false'
           #   Bucket: mylogs.s3.amazonaws.com
           #   Prefix: myprefix
+
+    ProductTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Product
+        AttributeDefinitions:
+          - AttributeName: "id"
+            AttributeType: "S"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
 
   ## In order to print out the hosted domain via `serverless info` we need to define the DomainName output for CloudFormation
   Outputs:

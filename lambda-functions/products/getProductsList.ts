@@ -1,19 +1,19 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
+import { productsRepo } from "../dynamo/Products/products.repository";
 import { withCors } from "../cors";
-import products from "../mocks/products.json";
 
 export const handler: APIGatewayProxyHandler = withCors(
   async (): Promise<APIGatewayProxyResult> => {
     try {
       return {
         statusCode: 200,
-        body: JSON.stringify(products),
+        body: JSON.stringify(await productsRepo.queryProducts()),
       };
     } catch (err: unknown) {
       return {
         statusCode: 500,
 
-        body: "Error occured",
+        body: JSON.stringify(err),
       };
     }
   }
