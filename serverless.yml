@@ -31,7 +31,7 @@ custom:
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
   s3BucketName: ${self:custom.client.bucketName}
-  serverlessPluginTypefscript:
+  serverlessPluginTypescript:
     tsConfigFileLocation: "./tsconfig.node.json"
 
 resources:

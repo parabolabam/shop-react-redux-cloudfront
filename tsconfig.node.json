@@ -1,14 +1,28 @@
 {
   "compilerOptions": {
-    "preserveConstEnums": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "target": "es5",
+    "target": "es2020",
+    "lib": ["es2020"],
     "outDir": ".build",
-    "moduleResolution": "node",
-    "lib": ["es2015"],
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "strictNullChecks": true,
+    "baseUrl": "./",
     "rootDir": "./lambda-functions"
   },
-  "include": ["lambda-functions/**/*"]
+  "include": ["./lambda-functions"],
+  "exclude": ["./dist", "/.build"]
 }
