@@ -1,6 +1,5 @@
 import { Schema } from "dynamoose";
 import { Item } from "dynamoose/dist/Item";
-import { schema as stockSchema } from "../Stock/stock.schema";
 
 export class Product extends Item {
   id = "";

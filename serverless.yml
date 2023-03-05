@@ -11,10 +11,10 @@ functions:
     handler: lambda-functions/products/addProduct.handler
     environment:
       PRODUCT_TABLE: ${self:custom.ProductTable.name}
-      STOCK_TABLE: ${self:custom.StockTable.name}
+
     events:
       - http:
-          path: "ecommerce-vs/add-product"
+          path: "ecommerce-vs/products"
           method: post
           cors: true
 
@@ -57,10 +57,8 @@ custom:
   ## Dynamo DB
   ProductTable:
     name: ${self:resources.Resources.ProductTable.Properties.TableName}
-  StockTable:
-    name: ${self:resources.Resources.StockTable.Properties.TableName}
 
-  #
+  ##
   serverlessPluginTypescript:
     tsConfigFileLocation: "./tsconfig.node.json"
 
@@ -164,11 +162,15 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: Product
-
-    StockTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: Stock
+        AttributeDefinitions:
+          - AttributeName: "id"
+            AttributeType: "S"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
 
   ## In order to print out the hosted domain via `serverless info` we need to define the DomainName output for CloudFormation
   Outputs:

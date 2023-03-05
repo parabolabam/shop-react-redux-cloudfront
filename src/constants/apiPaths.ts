@@ -1,4 +1,3 @@
-console.log(import.meta.env);
 const API_PATHS = {
   products: `${import.meta.env.VITE_API_URL}/products`,
   order: `${import.meta.env}`,

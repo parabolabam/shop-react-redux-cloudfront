@@ -17,5 +17,10 @@ class ProductsRepository {
     // throws error of mismatched type
     return await productsModel.scan().exec();
   }
+
+  async queryProductById(id: string) {
+    // throws error of mismatched type
+    return await productsModel.query("id").eq(id).exec();
+  }
 }
 export const productsRepo = new ProductsRepository();
