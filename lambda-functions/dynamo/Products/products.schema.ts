@@ -1,6 +1,15 @@
 import { Schema } from "dynamoose";
+import { Item } from "dynamoose/dist/Item";
+import { schema as stockSchema } from "../Stock/stock.schema";
 
-export const ProductSchema = new Schema(
+export class Product extends Item {
+  id = "";
+  title = "";
+  descrioption = "";
+  price = Infinity;
+}
+
+export const schema = new Schema(
   {
     id: {
       type: String,
@@ -21,6 +30,10 @@ export const ProductSchema = new Schema(
       type: Number,
       required: false,
       default: "",
+    },
+    count: {
+      type: Number,
+      required: false,
     },
   },
   {
